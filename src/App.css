@@ -47,5 +47,14 @@
   background-repeat: no-repeat; 
   background-position: center; 
   width: 100vw; 
-  height: 100vh; 
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+}
+
+.cipher-page {
+  flex-grow: 1;
+  padding: 20px;
 }
