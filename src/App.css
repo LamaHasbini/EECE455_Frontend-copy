@@ -40,3 +40,12 @@
 .read-the-docs {
   color: #888;
 }
+
+.background { 
+  background-image: url('./assets/map.jpg'); 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center; 
+  width: 100vw; 
+  height: 100vh; 
+}

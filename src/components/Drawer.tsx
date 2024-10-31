@@ -4,7 +4,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-// import Typography from '@mui/material/Typography';
+import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
@@ -14,8 +14,11 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
 const drawerWidth = 240;
-
-export default function MyDrawer() {
+interface MyName{
+  Name: string
+  change: any
+}
+export default function MyDrawer(props: MyName) {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -23,13 +26,13 @@ export default function MyDrawer() {
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
-        {/* <Toolbar>
+        <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            {cipher_name}
+            {props.Name}
           </Typography>
-        </Toolbar> */}
+        </Toolbar>
       </AppBar>
-      <Drawer
+      {/* <Drawer
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -41,6 +44,20 @@ export default function MyDrawer() {
         }}
         variant="permanent"
         anchor="left"
+      > */}
+      <Drawer
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          '& .MuiDrawer-paper': {
+            width: drawerWidth,
+            boxSizing: 'border-box',
+            backgroundColor: '#785835',
+            color: '#FBF8EB',         
+          },
+        }}
+        variant="permanent"
+        anchor="left"
       >
         <Toolbar />
         <Divider />
@@ -48,7 +65,7 @@ export default function MyDrawer() {
           {['Affine', 'Mono-Alphabetic', 'Vigenere', 'Hill', "Playfair", "Extended GCD"].map((text, index) => (
             <>
             <ListItem key={text} disablePadding>
-              <ListItemButton>
+              <ListItemButton onClick={()=>props.change(() => (text))}>
                 {/* <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon> */}

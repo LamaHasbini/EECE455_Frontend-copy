@@ -5,9 +5,13 @@ import MyDrawer from './components/Drawer'
 function App() {
 	document.title = 'Bits of Crypto'
 
+  const [cipher_name, ChangeCipher] = useState("Affine")
+
 	return (
 		<>
-			<MyDrawer />
+    <div className='background'>
+			<MyDrawer Name={cipher_name} change={ChangeCipher} />
+      </div>
 		</>
 	)
 }
