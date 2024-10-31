@@ -32,19 +32,6 @@ export default function MyDrawer(props: MyName) {
           </Typography>
         </Toolbar>
       </AppBar>
-      {/* <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
-            width: drawerWidth,
-            boxSizing: 'border-box',
-          },
-          color: 'black',
-        }}
-        variant="permanent"
-        anchor="left"
-      > */}
       <Drawer
         sx={{
           width: drawerWidth,
@@ -92,12 +79,6 @@ export default function MyDrawer(props: MyName) {
           ))}
         </List> */}
       </Drawer>
-      <Box
-        component="main"
-        sx={{ flexGrow: 1, bgcolor: 'background.default', p: 3 }}
-      >
-        <Toolbar />
-      </Box>
     </Box>
   );
 }
