@@ -20,7 +20,7 @@ export default function MyDrawer({ Name, SetCipherName }: MyName) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
+      {/* <CssBaseline /> */}
       <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
@@ -38,8 +38,8 @@ export default function MyDrawer({ Name, SetCipherName }: MyName) {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
-            backgroundColor: '#785835',
-            color: '#FBF8EB',
+            backgroundColor: '#4A6B7D',
+            color: 'white',
           },
         }}
         variant="permanent"

@@ -46,11 +46,9 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-image: url('./assets/map.jpg'); 
+  background-image: url('./assets/gears.jpg'); 
   background-size: cover; 
-  /* background-repeat: no-repeat;  */
+  background-repeat: repeat;
   background-position: center;
 }
 
