@@ -41,37 +41,23 @@
   color: #888;
 }
 
-/* .background { 
-  background-image: url('./assets/map.jpg'); 
-  background-size: cover; 
-  background-repeat: no-repeat; 
-  background-position: center; 
-  width: 100vw; 
-  height: 100vh;
-} */
+
 .background { 
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-image: url('./assets/map.jpg'); 
   background-size: cover; 
-  background-repeat: no-repeat; 
+  /* background-repeat: no-repeat;  */
   background-position: center;
 }
-/* .container {
-  display: flex;
-}
-
-.cipher-page {
-  flex-grow: 1;
-  padding: 20px;
-} */
 
 .container {
   display: flex;
   min-height: 100vh;
+  overflow-y: auto;
 }
 
 .cipher-page {
