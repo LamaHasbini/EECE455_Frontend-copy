@@ -1,5 +1,3 @@
-
-
 function AffineCipherPage() {
   return (
     <div>
