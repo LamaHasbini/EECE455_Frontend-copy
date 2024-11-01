@@ -1,26 +1,30 @@
 import { Button } from "@mui/material";
 
 interface FuncProps {
-    cipherText: string;
+    inputText: string;
     SetOutput: (value: string) => void;
-    key?: string;
+    keyString: string; 
     encryptionmethod: string;
 }
 
-const GetOutputAffine = (cipherText: string, key: string) => {
-    // Implement the decryption logic here
-    return "Decrypted Output";
+const GetOutputAffine = (inputText: string, keyString: string) => {
+    const [aValue, bValue] = keyString.split(",");  // Split to get aValue and bValue
+    return `Decrypted the ciphertext ${inputText} with A=${aValue}, B=${bValue}`;
 };
 
-const DecryptButton = ({ cipherText, SetOutput, key, encryptionmethod }: FuncProps) => {
+const GetOutputMonoAlphabetic = (inputText: string, keyString: string) => {
+    return `Decrypted the ciphertext ${inputText} with new alphabet = [${keyString}]`;
+};
+
+const DecryptButton = ({ inputText, SetOutput, keyString, encryptionmethod }: FuncProps) => {
     const handleClick = () => {
+        let output = "";
         switch (encryptionmethod) {
             case "Affine":
-                const output = GetOutputAffine(cipherText, key || "");
-                SetOutput(output);
+                output = GetOutputAffine(inputText, keyString);
                 break;
             case "Mono-Alphabetic":
-                // Implement the decryption logic here
+                output = GetOutputMonoAlphabetic(inputText, keyString) 
                 break;
             case "Vigenere":
                 // Implement the decryption logic here
@@ -35,12 +39,24 @@ const DecryptButton = ({ cipherText, SetOutput, key, encryptionmethod }: FuncPro
                 // Implement the decryption logic here
                 break;
             default:
-                
+                break;
         }
+        SetOutput(output);
     };
 
     return (
-        <Button variant="contained" size="large" onClick={handleClick}>
+        <Button 
+            variant="contained" 
+            size="large" 
+            onClick={handleClick}
+            sx={{
+                backgroundColor: '#111B20',   
+                color: 'white',       
+                '&:hover': {
+                    backgroundColor: 'black',  
+                },
+            }}
+        >
             Decrypt
         </Button>
     );
