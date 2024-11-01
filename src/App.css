@@ -41,11 +41,11 @@
   color: #888;
 }
 
-
 .background { 
   position: absolute;
   top: 0;
   left: 0;
+  width: 100%;
   background-image: url('./assets/gears.jpg'); 
   background-size: cover; 
   background-repeat: repeat;
@@ -62,4 +62,8 @@
   flex-grow: 1;
   padding: 40px;
   /* background: rgba(255, 255, 255, 0.8);  */
+}
+
+body{
+  color: white;
 }

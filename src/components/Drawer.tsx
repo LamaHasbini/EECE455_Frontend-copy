@@ -20,7 +20,7 @@ export default function MyDrawer({ Name, SetCipherName }: MyName) {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      {/* <CssBaseline /> */}
+      <CssBaseline />
       <AppBar
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
