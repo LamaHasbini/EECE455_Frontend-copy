@@ -61,9 +61,5 @@
 .cipher-page {
   flex-grow: 1;
   padding: 40px;
-  /* background: rgba(255, 255, 255, 0.8);  */
-}
-
-body{
   color: white;
 }
