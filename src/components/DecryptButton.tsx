@@ -35,7 +35,7 @@ const DecryptButton = ({ cipherText, SetOutput, key, encryptionmethod }: FuncPro
                 // Implement the decryption logic here
                 break;
             default:
-                break;
+                
         }
     };
 

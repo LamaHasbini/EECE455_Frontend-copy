@@ -1,21 +1,19 @@
 import { 
   Box,			CssBaseline,
   AppBar,		Toolbar,
-  Typography,	Drawer, 
   Divider,		List, 
   ListItem,		ListItemButton, 
-  ListItemText
+  ListItemText,	Drawer
 } from '@mui/material';
 import React from 'react';
 
 const drawerWidth = 240;
 
 interface MyName {
-  Name: string;
   SetCipherName: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export default function MyDrawer({ Name, SetCipherName }: MyName) {
+export default function MyDrawer({ SetCipherName }: MyName) {
   const cipherOptions = ['Affine', 'Mono-Alphabetic', 'Vigenere', 'Hill', 'Playfair', 'Extended GCD'];
 
   return (

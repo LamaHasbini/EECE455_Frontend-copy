@@ -36,7 +36,7 @@ function App() {
     <>
       <div className="background">
         <div className="container">
-          <MyDrawer Name={cipherName} SetCipherName={setCipherName} />
+          <MyDrawer SetCipherName={setCipherName} />
           <div className="cipher-page">
             {RenderCipherPage()}
           </div>
