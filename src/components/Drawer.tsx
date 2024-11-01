@@ -25,11 +25,11 @@ export default function MyDrawer({ Name, SetCipherName }: MyName) {
         position="fixed"
         sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px` }}
       >
-        <Toolbar>
+        {/* <Toolbar>
           <Typography variant="h6" noWrap component="div">
             {Name}
           </Typography>
-        </Toolbar>
+        </Toolbar> */}
       </AppBar>
       <Drawer
         sx={{
