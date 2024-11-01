@@ -14,9 +14,28 @@ const GetOutputAffine = (cipherText: string, key: string) => {
 
 const DecryptButton = ({ cipherText, SetOutput, key, encryptionmethod }: FuncProps) => {
     const handleClick = () => {
-        if (encryptionmethod === "Affine") {
-            const output = GetOutputAffine(cipherText, key || "");
-            SetOutput(output);
+        switch (encryptionmethod) {
+            case "Affine":
+                const output = GetOutputAffine(cipherText, key || "");
+                SetOutput(output);
+                break;
+            case "Mono-Alphabetic":
+                // Implement the decryption logic here
+                break;
+            case "Vigenere":
+                // Implement the decryption logic here
+                break;
+            case "Hill":
+                // Implement the decryption logic here
+                break;
+            case "Playfair":
+                // Implement the decryption logic here
+                break;
+            case "Extended GCD":
+                // Implement the decryption logic here
+                break;
+            default:
+                break;
         }
     };
 
