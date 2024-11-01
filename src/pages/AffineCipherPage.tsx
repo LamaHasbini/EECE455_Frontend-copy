@@ -1,3 +1,8 @@
+import React, { useState } from 'react';
+import { TextField } from '@mui/material';
+import DecryptButton from '../components/DecryptButton';
+import EncryptButton from '../components/EncryptButton';
+
 
 
 function AffineCipherPage() {
