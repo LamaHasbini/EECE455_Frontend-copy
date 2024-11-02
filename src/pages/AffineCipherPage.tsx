@@ -1,16 +1,27 @@
 import React, { useState } from 'react';
-import { TextField } from '@mui/material';
+import { TextField, Tooltip } from '@mui/material';
 import DecryptButton from '../components/DecryptButton';
 import EncryptButton from '../components/EncryptButton';
 import CrackButton from '../components/CrackButton';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 function AffineCipherPage() {
-    const [aValue, setAValue] = useState("");
-    const [bValue, setBValue] = useState("");
+    const [aValue, setAValue] = useState("0");
+    const [bValue, setBValue] = useState("0");
     const [textValue, setTextValue] = useState("");
     const [outputValue, setOutputValue] = useState("");
+    const [alphabet, setAlphabetValue] = useState("abcdefghijklmnopqrstuvwxyz".toUpperCase());
     const method = "Affine";
     const combinedKey = `${aValue},${bValue}`;
+
+
+    const handleAlphabetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        if (/^[a-zA-Z]*$/.test(value)) { // Allow only alphabet letters
+            const uniqueLetters = Array.from(new Set(value.split(''))).join('');
+            setAlphabetValue(uniqueLetters.toUpperCase());
+        }
+    };
 
     const handleAChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -38,14 +49,27 @@ function AffineCipherPage() {
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-          height: '100vh',
+        //   minHeight: '100vh',
           padding: '20px',
           boxSizing: 'border-box'
       }}>
+        <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
           <h1>Affine Cipher</h1>
-          {/* Key Section */}
+          <Tooltip 
+          title="Instructions: Enter positive integers for A and B. Ensure that A and the length of the alphabet are coprime. Enter a shuffled alphabet if desired. Enter the text to be encrypted or decrypted."
+          componentsProps={{
+            tooltip: {
+              sx: {
+                fontSize: '1rem', // Adjust the font size as needed
+              },
+            },
+          }}
+          >
+                <HelpOutlineOutlinedIcon fontSize='large'/>
+            </Tooltip>
+        </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '40px' }}>
-              <span style={{ fontSize: '1.25rem' }}>Key:</span> 
+              {/* <span style={{ fontSize: '1.25rem' }}>Keys:</span>  */}
               
               <TextField 
                   id="outlined-basic-a" 
@@ -73,6 +97,21 @@ function AffineCipherPage() {
                   }} 
               />
           </div>
+
+          <TextField 
+                  id="outlined-basic-a" 
+                  label="Enter Shuffled Alphabet" 
+                  variant="filled"
+                  value={alphabet}
+                  onChange={handleAlphabetChange}
+                  sx={{ 
+                      backgroundColor: 'white', 
+                      borderRadius: '8px',
+                      width: '28rem',
+                    //   height: '4rem'
+                  }} 
+                  
+              />
 
           {/* Text Input */}
           <div style={{ marginTop: '20px', fontSize: 26, width: '75%' }}>

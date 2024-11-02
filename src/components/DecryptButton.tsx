@@ -5,7 +5,13 @@ interface FuncProps {
     SetOutput: (value: string) => void;
     keyString: string; 
     encryptionmethod: string;
+    alphabet?: string;
 }
+
+const GetOutputVigenere = (inputText :string , keyString: string, alphabet: string) =>
+{
+    return `Decrypted the plaintext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
+};
 
 const GetOutputAffine = (inputText: string, keyString: string) => {
     const [aValue, bValue] = keyString.split(",");  // Split to get aValue and bValue
@@ -16,7 +22,7 @@ const GetOutputMonoAlphabetic = (inputText: string, keyString: string) => {
     return `Decrypted the ciphertext ${inputText} with new alphabet = [${keyString}]`;
 };
 
-const DecryptButton = ({ inputText, SetOutput, keyString, encryptionmethod }: FuncProps) => {
+const DecryptButton = ({ inputText, SetOutput, keyString, encryptionmethod, alphabet }: FuncProps) => {
     const handleClick = () => {
         let output = "";
         switch (encryptionmethod) {
@@ -27,7 +33,7 @@ const DecryptButton = ({ inputText, SetOutput, keyString, encryptionmethod }: Fu
                 output = GetOutputMonoAlphabetic(inputText, keyString) 
                 break;
             case "Vigenere":
-                // Implement the decryption logic here
+                output = GetOutputVigenere(inputText, keyString, alphabet || "")
                 break;
             case "Hill":
                 // Implement the decryption logic here

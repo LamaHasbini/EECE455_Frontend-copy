@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { TextField } from '@mui/material';
+import { TextField, Tooltip } from '@mui/material';
 import DecryptButton from '../components/DecryptButton';
 import EncryptButton from '../components/EncryptButton';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 function VigenerePage() {
+    const [alphabet, setAlphabetValue] = useState("abcdefghijklmnopqrstuvwxyz".toUpperCase());
     const [keyword, setKeywordValue] = useState("");
     const [textValue, setTextValue] = useState("");
     const [outputValue, setOutputValue] = useState("");
@@ -22,16 +24,37 @@ function VigenerePage() {
         setTextValue(value);
     };
 
+    const handleAlphabetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        if (/^[a-zA-Z]*$/.test(value)) { // Allow only alphabet letters
+            const uniqueLetters = Array.from(new Set(value.split(''))).join('');
+            setAlphabetValue(uniqueLetters.toUpperCase());
+        }
+    };
+
     return (
         <div style={{
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center', 
             flexDirection: 'column',
-            padding: '20px',
+            // padding: '20px',
             boxSizing: 'border-box',
         }}>
-            <h1 style={{ marginBottom: '20px' }}>Vigenere Cipher</h1>
+            <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
+            <h1>Vigenere Cipher</h1>
+            <Tooltip 
+            title="Instructions: Enter the alphabet mapping for the mono-alphabetic cipher. Each letter should be unique."
+            componentsProps={{
+            tooltip: {
+              sx: {
+                fontSize: '1rem', // Adjust the font size as needed
+              },
+            },}}
+            >
+                <HelpOutlineOutlinedIcon fontSize='large'/>
+            </Tooltip>
+            </div>
 
             {/* Key Section */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '40px' }}>
@@ -48,7 +71,22 @@ function VigenerePage() {
                         width: '350px',
                     }} 
                 />
+
+                <TextField 
+                  id="outlined-basic-a" 
+                  label="Enter Shuffled Alphabet" 
+                  variant="filled"
+                  value={alphabet}
+                  onChange={handleAlphabetChange}
+                  sx={{ 
+                      backgroundColor: 'white', 
+                      borderRadius: '8px',
+                      width: '350px',
+                  }} 
+              />
             </div>
+
+            
 
             {/* Text Input */}
             <div style={{ marginTop: '20px', fontSize: 26, width: '75%' }}>
@@ -70,8 +108,8 @@ function VigenerePage() {
 
             {/* Button Section */}
             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', gap: '10rem' }}>
-                <EncryptButton SetOutput={setOutputValue} inputText={textValue} keyString={keyword} encryptionmethod={method}/>
-                <DecryptButton SetOutput={setOutputValue} inputText={textValue} keyString={keyword} encryptionmethod={method}/>
+                <EncryptButton SetOutput={setOutputValue} inputText={textValue} keyString={keyword} encryptionmethod={method} alphabet={alphabet}/>
+                <DecryptButton SetOutput={setOutputValue} inputText={textValue} keyString={keyword} encryptionmethod={method} alphabet={alphabet}/>
             </div>
             
             {/* Output Section */}

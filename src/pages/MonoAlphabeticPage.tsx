@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { TextField } from '@mui/material';
+import { TextField, Tooltip } from '@mui/material';
 import DecryptButton from '../components/DecryptButton';
 import EncryptButton from '../components/EncryptButton';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 
 function MonoAlphabeticPage() {
-    const [alphabet, setAlphabetValue] = useState("");
+    const [alphabet, setAlphabetValue] = useState("abcdefghijklmnopqrstuvwxyz".toUpperCase());
     const [textValue, setTextValue] = useState("");
     const [outputValue, setOutputValue] = useState("");
     const method = "Mono-Alphabetic";
@@ -12,13 +13,14 @@ function MonoAlphabeticPage() {
     const handleAlphabetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         if (/^[a-zA-Z]*$/.test(value)) { // Allow only alphabet letters
-          setAlphabetValue(value);
-      }
+            const uniqueLetters = Array.from(new Set(value.split(''))).join('');
+            setAlphabetValue(uniqueLetters.toUpperCase());
+        }
     };
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         let value = event.target.value;
-        value = value.replace(/[A-Z]/g, (char) => char.toLowerCase()); // Convert uppercase to lowercase
+        value = value.replace(/[A-Z]/g, (char) => char.toLowerCase());
         setTextValue(value);
     };
 
@@ -28,14 +30,27 @@ function MonoAlphabeticPage() {
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-          height: '100vh',
+        //   minHeight: '100vh',
           padding: '20px',
           boxSizing: 'border-box'
       }}>
+        <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
           <h1>Mono-Alphabetic Cipher</h1>
+            <Tooltip 
+            title="Instructions: Enter the alphabet mapping for the mono-alphabetic cipher. Each letter should be unique."
+            componentsProps={{
+            tooltip: {
+              sx: {
+                fontSize: '1rem', // Adjust the font size as needed
+              },
+            },}}
+            >
+                <HelpOutlineOutlinedIcon fontSize='large'/>
+            </Tooltip>
+        </div>
           {/* Key Section */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '40px' }}>
-              <span style={{ fontSize: '1.25rem' }}>Key:</span> 
+              {/* <span style={{ fontSize: '1.25rem' }}>Key:</span>  */}
               
               <TextField 
                   id="outlined-basic-a" 
