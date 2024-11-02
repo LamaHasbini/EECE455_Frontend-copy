@@ -113,7 +113,6 @@ function AffineCipherPage() {
                   
               />
 
-          {/* Text Input */}
           <div style={{ marginTop: '20px', fontSize: 26, width: '75%' }}>
               <label htmlFor="plaintext-input" style={{ marginBottom: '5px', display: 'block', color: 'white' }}>Enter Text</label>
               <TextField  

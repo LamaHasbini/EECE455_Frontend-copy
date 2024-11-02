@@ -22,6 +22,10 @@ const GetOutputMonoAlphabetic = (inputText: string, keyString: string) => {
     return `Decrypted the ciphertext ${inputText} with new alphabet = [${keyString}]`;
 };
 
+const GetOutputHill = (inputText: string, keyString: string, alphabet: string) => {
+    return `Decrypted the ciphertext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
+}
+
 const DecryptButton = ({ inputText, SetOutput, keyString, encryptionmethod, alphabet }: FuncProps) => {
     const handleClick = () => {
         let output = "";
@@ -36,7 +40,7 @@ const DecryptButton = ({ inputText, SetOutput, keyString, encryptionmethod, alph
                 output = GetOutputVigenere(inputText, keyString, alphabet || "")
                 break;
             case "Hill":
-                // Implement the decryption logic here
+                output = GetOutputHill(inputText, keyString, alphabet || "");
                 break;
             case "Playfair":
                 // Implement the decryption logic here
