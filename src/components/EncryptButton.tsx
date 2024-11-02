@@ -13,9 +13,9 @@ const GetOutputVigenere = (inputText :string , keyString: string, alphabet: stri
     return `Encrypted the plaintext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
 };
 
-const GetOutputAffine = (inputText: string, keyString: string) => {
+const GetOutputAffine = (inputText: string, keyString: string, alphabet: string) => {
     const [aValue, bValue] = keyString.split(",");  
-    return `Encrypted the plaintext ${inputText} with A=${aValue}, B=${bValue}`;
+    return `Encrypted the plaintext ${inputText} with A=${aValue}, B=${bValue}, alphabet=${alphabet}`;
 };
 
 const GetOutputMonoAlphabetic = (inputText: string, keyString: string) => {
@@ -31,7 +31,7 @@ const EncryptButton = ({ inputText, SetOutput, keyString, encryptionmethod, alph
         let output = "";
         switch (encryptionmethod) {
             case "Affine":
-                output = GetOutputAffine(inputText, keyString);
+                output = GetOutputAffine(inputText, keyString, alphabet || "");
                 break;
                 case "Mono-Alphabetic":
                     output = GetOutputMonoAlphabetic(inputText, keyString)                    

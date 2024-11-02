@@ -19,7 +19,7 @@ const Matrix: React.FC<MatrixProps> = ({ size, onMatrixChange }) => {
         const initialValues = Array.from({ length: size }, () => Array(size).fill("0"));
         setValues(initialValues);
         onMatrixChange(initialValues);
-    }, [size]); // Removed onMatrixChange from dependencies
+    }, [size]);
 
     const handleChange = (row: number, col: number, value: string) => {
         const regex = /^-?\d*$/; // Regex for optional negative sign followed by digits
@@ -76,8 +76,16 @@ function HillCipherPage() {
 	const [textValue, setTextValue] = useState("");
 	const [outputValue, setOutputValue] = useState("");
 	const [combinedKey, setCombinedKey] = useState<string>("");
-	const [alphabet, setalphabet] = useState<string>("abcdefghijklmnopqrstuvwxyz".toUpperCase());
+	const [alphabet, setAlphabetValue] = useState<string>("abcdefghijklmnopqrstuvwxyz".toUpperCase());
 	const method = "Hill";
+
+	const handleAlphabetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        if (/^[a-zA-Z]*$/.test(value)) { // Allow only alphabet letters
+            const uniqueLetters = Array.from(new Set(value.split(''))).join('');
+            setAlphabetValue(uniqueLetters.toUpperCase());
+        }
+    };
 
 	const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		let value = event.target.value;
@@ -130,9 +138,25 @@ function HillCipherPage() {
 			>
 			Switch to {matrixSize === 2 ? '3x3' : '2x2'}
 			</Button>
+
+			
 		</div>
+		
 
 		<div style={{ marginTop: '20px', fontSize: 26, width: '75%' }}>
+		<TextField 
+                  id="outlined-basic-a" 
+                  label="Enter Shuffled Alphabet" 
+                  variant="filled"
+                  value={alphabet}
+                  onChange={handleAlphabetChange}
+                  sx={{ 
+                    	backgroundColor: 'white', 
+                    	borderRadius: '8px',
+                    	width: '28rem',
+						marginBottom: '1rem'
+                  }}
+              />
 				<label htmlFor="plaintext-input" style={{ marginBottom: '5px', display: 'block', color: 'white' }}>Enter Text</label>
 				<TextField  
 					id="plaintext-input" 
@@ -172,6 +196,10 @@ function HillCipherPage() {
 					value={outputValue}
 				/>
 			</div>  
+			<div>
+				<h3>backgroudn info</h3>
+				<p> Hill cipher is a polygraphic substitution cipher based on linear algebra. Each letter is represented by a number modulo 26. Often the simple scheme A=0, B=1, ..., Z=25 is used, but this is not an essential feature of the cipher. To encrypt a message, each block of n letters (considered as an n-component vector) is multiplied by an invertible n × n matrix, then reduced modulo 26. The matrix used for encryption is the cipher key, and it should be chosen randomly from the set of invertible n × n matrices (modulo 26).</p>
+			</div>
 		</div>
 	);
 }

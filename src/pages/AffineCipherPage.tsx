@@ -16,7 +16,7 @@ function AffineCipherPage() {
 
 
     const handleAlphabetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const value = event.target.value;
+        let value = event.target.value;
         if (/^[a-zA-Z]*$/.test(value)) { // Allow only alphabet letters
             const uniqueLetters = Array.from(new Set(value.split(''))).join('');
             setAlphabetValue(uniqueLetters.toUpperCase());
@@ -32,7 +32,7 @@ function AffineCipherPage() {
 
     const handleBChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
-        if (/^\d*$/.test(value)) { // Allow only digits
+        if (/^\d*$/.test(value)) {
             setBValue(value);
         }
     };
@@ -49,7 +49,6 @@ function AffineCipherPage() {
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-        //   minHeight: '100vh',
           padding: '20px',
           boxSizing: 'border-box'
       }}>
@@ -132,8 +131,8 @@ function AffineCipherPage() {
 
           {/* Button Section */}
           <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'center', gap: '10rem' }}>
-              <EncryptButton SetOutput={setOutputValue} inputText={textValue} keyString={combinedKey} encryptionmethod={method}/>
-              <DecryptButton SetOutput={setOutputValue} inputText={textValue} keyString={combinedKey} encryptionmethod={method}/>
+              <EncryptButton SetOutput={setOutputValue} inputText={textValue} keyString={combinedKey} encryptionmethod={method} alphabet={alphabet}/>
+              <DecryptButton SetOutput={setOutputValue} inputText={textValue} keyString={combinedKey} encryptionmethod={method} alphabet={alphabet}/>
               <CrackButton SetOutput={setOutputValue} inputText={textValue} encryptionmethod={method}/>
           </div>
           
