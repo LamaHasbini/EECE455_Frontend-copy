@@ -31,7 +31,7 @@ function MonoAlphabeticPage() {
           alignItems: 'center',
           flexDirection: 'column',
         //   minHeight: '100vh',
-          padding: '20px',
+        //   padding: '20px',
           boxSizing: 'border-box'
       }}>
         <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>

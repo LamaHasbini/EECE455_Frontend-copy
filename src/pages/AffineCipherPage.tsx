@@ -49,7 +49,7 @@ function AffineCipherPage() {
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-          padding: '20px',
+        //   padding: '20px',
           boxSizing: 'border-box'
       }}>
         <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
