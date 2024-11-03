@@ -34,7 +34,7 @@ const Matrix: React.FC<MatrixProps> = ({ size, onMatrixChange }) => {
     };
 
     return (
-        <Grid container direction="column" spacing={2} style={{ marginLeft: "7rem" }}>
+        <Grid container direction="column" spacing={2}>
             {values.map((row, rowIndex) => (
                 <Grid
                     container
@@ -78,6 +78,9 @@ function HillCipherPage() {
 	const [combinedKey, setCombinedKey] = useState<string>("");
 	const [alphabet, setAlphabetValue] = useState<string>("abcdefghijklmnopqrstuvwxyz".toUpperCase());
 	const method = "Hill";
+	const [inverseMatrix, setInverseMatrix] = useState<string[][]>(
+		Array.from({ length: matrixSize }, () => Array(matrixSize).fill(""))
+	  );
 
 	const handleAlphabetChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
@@ -96,6 +99,19 @@ function HillCipherPage() {
 		console.log('Updated Matrix:', matrix);
 		const newKey = matrix.flat().join(",");
 		setCombinedKey(() => newKey);
+
+		// Compute the inverse matrix
+		const modulus = alphabet.length;
+		const numericMatrix = matrix.map(row => row.map(value => parseInt(value) % modulus));
+		const invMatrix = computeInverseMatrix(numericMatrix, modulus);
+	
+		if (invMatrix) {
+		  const invMatrixStrings = invMatrix.map(row => row.map(value => value.toString()));
+		  setInverseMatrix(invMatrixStrings);
+		} else {
+		  const emptyMatrix = Array.from({ length: matrixSize }, () => Array(matrixSize).fill(""));
+		  setInverseMatrix(emptyMatrix);
+		}
 	};
 
 	const toggleMatrixSize = () => {
@@ -129,16 +145,23 @@ function HillCipherPage() {
 			</Tooltip>
 		</div>
 
-		<div style={{ display: 'flex', alignItems: 'center' }}>
+		<div style={{ display: 'flex', alignItems: 'center', marginLeft: '-8rem'}}>
 			<Matrix size={matrixSize} onMatrixChange={handleMatrixChange}/>
 			<Button
 			variant="contained"
 			onClick={toggleMatrixSize}
-			style={{ marginLeft: '2rem' }}
+			style={{ 
+				marginRight: '5rem',
+				// justifyContent: 'left',
+				
+			}}
 			>
 			Switch to {matrixSize === 2 ? '3x3' : '2x2'}
 			</Button>
 
+			<div style={{ marginLeft: '4rem' }}>
+				<InverseMatrix values={inverseMatrix} />
+			</div>
 			
 		</div>
 		
@@ -153,7 +176,7 @@ function HillCipherPage() {
                   sx={{ 
                     	backgroundColor: 'white', 
                     	borderRadius: '8px',
-                    	width: '28rem',
+                    	width: '20rem',
 						marginBottom: '1rem'
                   }}
               />
@@ -203,5 +226,133 @@ function HillCipherPage() {
 		</div>
 	);
 }
+
+// Function to compute the inverse of the matrix modulo N
+function computeInverseMatrix(matrix: number[][], modulus: number): number[][] | null {
+	const size = matrix.length;
+	if (size === 2) {
+	  // Compute inverse for 2x2 matrix
+	  const det = (matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]) % modulus;
+	  const detInv = modInverse(det, modulus);
+	  if (detInv === null) return null;
+  
+	  const invMatrix = [
+		[(matrix[1][1] * detInv) % modulus, (-matrix[0][1] * detInv) % modulus],
+		[(-matrix[1][0] * detInv) % modulus, (matrix[0][0] * detInv) % modulus]
+	  ];
+  
+	  // Adjust values to be positive modulo modulus
+	  const adjustedInvMatrix = invMatrix.map(row =>
+		row.map(value => ((value % modulus) + modulus) % modulus)
+	  );
+  
+	  return adjustedInvMatrix;
+	} else if (size === 3) {
+	  // Compute inverse for 3x3 matrix
+	  const invMatrix = compute3x3Inverse(matrix, modulus);
+	  if (invMatrix) {
+		return invMatrix;
+	  } else {
+		return null;
+	  }
+	}
+	return null;
+  }
+  
+  function modInverse(a: number, modulus: number): number | null {
+	// Extended Euclidean Algorithm to find the modular inverse
+	let m0 = modulus;
+	let x0 = 0;
+	let x1 = 1;
+  
+	if (modulus === 1) return null;
+  
+	while (a > 1) {
+	  const q = Math.floor(a / modulus);
+	  let t = modulus;
+  
+	  modulus = a % modulus;
+	  a = t;
+	  t = x0;
+  
+	  x0 = x1 - q * x0;
+	  x1 = t;
+	}
+  
+	if (x1 < 0) x1 += m0;
+  
+	return x1;
+  }
+  
+  function compute3x3Inverse(matrix: number[][], modulus: number): number[][] | null {
+	// Calculate the determinant
+	const det = (
+	  matrix[0][0] * (matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) -
+	  matrix[0][1] * (matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0]) +
+	  matrix[0][2] * (matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0])
+	) % modulus;
+  
+	const detInv = modInverse(det, modulus);
+	if (detInv === null) return null;
+  
+	// Compute the adjugate matrix
+	const adjugate = [
+	  [
+		((matrix[1][1] * matrix[2][2] - matrix[1][2] * matrix[2][1]) % modulus + modulus) % modulus,
+		((-(matrix[0][1] * matrix[2][2] - matrix[0][2] * matrix[2][1])) % modulus + modulus) % modulus,
+		((matrix[0][1] * matrix[1][2] - matrix[0][2] * matrix[1][1]) % modulus + modulus) % modulus,
+	  ],
+	  [
+		((-(matrix[1][0] * matrix[2][2] - matrix[1][2] * matrix[2][0])) % modulus + modulus) % modulus,
+		((matrix[0][0] * matrix[2][2] - matrix[0][2] * matrix[2][0]) % modulus + modulus) % modulus,
+		((-(matrix[0][0] * matrix[1][2] - matrix[0][2] * matrix[1][0])) % modulus + modulus) % modulus,
+	  ],
+	  [
+		((matrix[1][0] * matrix[2][1] - matrix[1][1] * matrix[2][0]) % modulus + modulus) % modulus,
+		((-(matrix[0][0] * matrix[2][1] - matrix[0][1] * matrix[2][0])) % modulus + modulus) % modulus,
+		((matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]) % modulus + modulus) % modulus,
+	  ],
+	];
+  
+	// Multiply adjugate matrix by determinant inverse modulo modulus
+	const invMatrix = adjugate.map(row =>
+	  row.map(value => (detInv * value) % modulus)
+	);
+  
+	// Adjust values to be positive modulo modulus
+	const adjustedInvMatrix = invMatrix.map(row =>
+	  row.map(value => ((value % modulus) + modulus) % modulus)
+	);
+  
+	return adjustedInvMatrix;
+  }
+  
+  const InverseMatrix: React.FC<{ values: string[][] }> = ({ values }) => {
+	return (
+	  <Grid container direction="column" spacing={2}>
+		{values.map((row, rowIndex) => (
+		  <Grid item key={`row-${rowIndex}`}>
+			<Grid container spacing={2} justifyContent="center">
+			  {row.map((value, colIndex) => (
+				<Grid item xs={4} key={`cell-${rowIndex}-${colIndex}`}>
+				  <TextField
+					variant="outlined"
+					size="small"
+					fullWidth
+					style={{ backgroundColor: 'white' }}
+					value={value}
+					InputProps={{
+					  readOnly: true,
+					  style: { backgroundColor: 'white' },
+					}}
+				  />
+				</Grid>
+			  ))}
+			</Grid>
+		  </Grid>
+		))}
+	  </Grid>
+	);
+  };
 
 export default HillCipherPage;
