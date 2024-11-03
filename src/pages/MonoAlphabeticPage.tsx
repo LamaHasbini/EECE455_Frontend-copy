@@ -61,7 +61,7 @@ function MonoAlphabeticPage() {
                   sx={{ 
                       backgroundColor: 'white', 
                       borderRadius: '8px',
-                      width: '350px',
+                      width: '20rem',
                   }} 
               />
           </div>

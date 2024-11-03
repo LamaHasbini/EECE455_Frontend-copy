@@ -26,6 +26,10 @@ const GetOutputHill = (inputText: string, keyString: string, alphabet: string) =
     return `Decrypted the ciphertext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
 }
 
+const GetOutputPlayfair = (inputText: string, keyString: string, alphabet: string) => {
+    return `Decrypted the ciphertext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
+}
+
 const DecryptButton = ({ inputText, SetOutput, keyString, encryptionmethod, alphabet }: FuncProps) => {
     const handleClick = () => {
         let output = "";
@@ -43,7 +47,7 @@ const DecryptButton = ({ inputText, SetOutput, keyString, encryptionmethod, alph
                 output = GetOutputHill(inputText, keyString, alphabet || "");
                 break;
             case "Playfair":
-                // Implement the decryption logic here
+                output = GetOutputPlayfair(inputText, keyString, alphabet || "");
                 break;
             case "Extended GCD":
                 // Implement the decryption logic here

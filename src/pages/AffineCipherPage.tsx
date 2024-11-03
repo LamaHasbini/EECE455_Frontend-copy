@@ -67,9 +67,7 @@ function AffineCipherPage() {
                 <HelpOutlineOutlinedIcon fontSize='large'/>
             </Tooltip>
         </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '40px' }}>
-              {/* <span style={{ fontSize: '1.25rem' }}>Keys:</span>  */}
-              
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '40px' }}>              
               <TextField 
                   id="outlined-basic-a" 
                   label="Enter Positive Integer A" 
@@ -106,7 +104,7 @@ function AffineCipherPage() {
                   sx={{ 
                       backgroundColor: 'white', 
                       borderRadius: '8px',
-                      width: '28rem',
+                      width: '20rem',
                     //   height: '4rem'
                   }} 
                   
