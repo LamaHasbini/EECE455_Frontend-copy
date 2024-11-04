@@ -1,4 +1,5 @@
 import { Button } from "@mui/material";
+import axios from "axios";
 
 interface FuncProps {
     inputText: string;
@@ -18,8 +19,17 @@ const GetOutputAffine = (inputText: string, keyString: string, alphabet: string)
     return `Decrypted the ciphertext ${inputText} with A=${aValue}, B=${bValue}, alphabet=${alphabet}`;
 };
 
-const GetOutputMonoAlphabetic = (inputText: string, keyString: string) => {
-    return `Decrypted the ciphertext ${inputText} with new alphabet = [${keyString}]`;
+const GetOutputMonoAlphabetic = async (inputText: string, keyString: string) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:5000/decrypt/mono_alphabetic', {
+            inputText,
+            keyString,
+            cipher: 'mono_alphabetic',
+        });
+        return response.data.decrypted_text;
+      } catch (err) {
+        return "ERROR";
+      }
 };
 
 const GetOutputHill = (inputText: string, keyString: string, alphabet: string) => {
@@ -30,24 +40,24 @@ const GetOutputPlayfair = (inputText: string, keyString: string, alphabet: strin
     return `Decrypted the ciphertext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
 }
 
-const DecryptButton = ({ inputText, SetOutput, keyString, encryptionmethod, alphabet }: FuncProps) => {
-    const handleClick = () => {
+const DecryptButton =  ({ inputText, SetOutput, keyString, encryptionmethod, alphabet }: FuncProps) => {
+    const handleClick = async () => {
         let output = "";
         switch (encryptionmethod) {
             case "Affine":
-                output = GetOutputAffine(inputText, keyString, alphabet || "");
+                output = await GetOutputAffine(inputText, keyString, alphabet || "");
                 break;
             case "Mono-Alphabetic":
-                output = GetOutputMonoAlphabetic(inputText, keyString) 
+                output = await GetOutputMonoAlphabetic(inputText, keyString) 
                 break;
             case "Vigenere":
-                output = GetOutputVigenere(inputText, keyString, alphabet || "")
+                output = await GetOutputVigenere(inputText, keyString, alphabet || "")
                 break;
             case "Hill":
-                output = GetOutputHill(inputText, keyString, alphabet || "");
+                output = await GetOutputHill(inputText, keyString, alphabet || "");
                 break;
             case "Playfair":
-                output = GetOutputPlayfair(inputText, keyString, alphabet || "");
+                output = await GetOutputPlayfair(inputText, keyString, alphabet || "");
                 break;
             case "Extended GCD":
                 // Implement the decryption logic here
