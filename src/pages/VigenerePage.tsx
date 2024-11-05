@@ -38,22 +38,23 @@ function VigenerePage() {
             justifyContent: 'center',
             alignItems: 'center', 
             flexDirection: 'column',
-            // padding: '20px',
             boxSizing: 'border-box',
         }}>
             <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
             <h1>Vigenere Cipher</h1>
             <Tooltip 
-            title="Instructions: Enter the alphabet mapping for the mono-alphabetic cipher. Each letter should be unique."
-            componentsProps={{
-            tooltip: {
-              sx: {
-                fontSize: '1rem', // Adjust the font size as needed
-              },
-            },}}
-            >
-                <HelpOutlineOutlinedIcon fontSize='large'/>
-            </Tooltip>
+                    title={'Instructions:\n 1. Enter the key word to be used for the Vigenere Cipher.\n 2. Enter the text that you wish to encrypt or decrypt.\n You can optionally define the alphabet to be used, otherwise the default will be applied.'}
+                    componentsProps={{
+                        tooltip: {
+                            sx: {
+                                fontSize: '1rem',
+                                whiteSpace: 'pre-line', 
+                            },
+                        },
+                    }}
+                >
+                    <HelpOutlineOutlinedIcon fontSize='large'/>
+                </Tooltip>
             </div>
 
             {/* Key Section */}
@@ -85,9 +86,7 @@ function VigenerePage() {
                   }} 
               />
             </div>
-
             
-
             {/* Text Input */}
             <div style={{ marginTop: '20px', fontSize: 26, width: '75%' }}>
                 <label htmlFor="plaintext-input" style={{ marginBottom: '5px', display: 'block', color: 'white' }}>Enter Text</label>
@@ -133,8 +132,14 @@ function VigenerePage() {
             {/* History & Background Info Section */}
             <div style={{ marginTop: '40px', color: 'white', width: '75%' }}>
                 <h2>History & Background Info</h2>
-                <p>The Vigenère cipher is a method of encrypting alphabetic text by using a simple form of polyalphabetic substitution. A polyalphabetic cipher uses multiple substitution alphabets to encrypt the data. The Vigenère cipher has been reinvented many times. The method was originally described by Giovan Battista Bellaso in his 1553 book La cifra del. Sig. Giovan Battista Bellaso; however, the scheme was later misattributed to Blaise de Vigenère in the 19th century, and is now widely known as the "Vigenère cipher".</p>
-                <p>The Vigenère cipher is easy to understand and implement, but it resisted all attempts to break it for three centuries, earning it the description le chiffre indéchiffrable (French for 'the indecipherable cipher'). Many people have tried to implement the Vigenère cipher, but most of them failed to do so. The Vigenère cipher is simple to understand and implement, but it is also very difficult to break.</p>
+                <p>The Vigenère Cipher, named after the 16th-century French diplomat Blaise de Vigenère, is a method of encrypting alphabetic text through a simple form of polyalphabetic substitution. 
+                    Unlike monoalphabetic ciphers, which replace each letter consistently, the Vigenère Cipher employs a keyword to dictate the shift applied to each letter in the plaintext. 
+                    The technique involves creating a table, known as the Vigenère tableau, where the rows represent the alphabet shifted by different positions based on the keyword. 
+                    This innovative approach significantly enhances security by obscuring the frequency patterns common in simpler ciphers, making it more resistant to frequency analysis. 
+                    Although the cipher was described in Vigenère's 1586 work, “Traicté des chiffres,” its effectiveness was not fully appreciated until it was used by various military organizations in the centuries that followed. 
+                    The Vigenère Cipher became a popular method of encryption in the 19th century and was considered secure until the advent of more sophisticated cryptanalysis techniques. 
+                    Its vulnerabilities were eventually exposed, particularly by the mathematician Charles Babbage in the 19th century, leading to its decline in serious use. 
+                    Despite this, the Vigenère Cipher remains a prominent historical example of encryption and is frequently studied in the context of cryptography education, showcasing the evolution of encryption techniques and the ongoing battle between cryptographers and cryptanalysts.</p>
             </div>
         </div>
     );

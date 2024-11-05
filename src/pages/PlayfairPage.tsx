@@ -56,11 +56,12 @@ function PlayfairPage() {
 			<div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
 				<h1>Playfair Cipher</h1>
 					<Tooltip 
-					title="Instructions: Enter the key square for the Playfair cipher. The key square should be a 5x5 grid of letters, with each letter of the alphabet appearing exactly once (combine I and J)."
+					title={'Instructions:\n 1. Enter the key to be used in the Playfair cipher. The coresponding 5x5 matrix will be displayed with each letter of the alphabet appearing exactly once (combining I and J into the same cell).\n 2. Enter the text which you wish to encrypt or decrypt.'}
 					componentsProps={{
 					tooltip: {
 						sx: {
-							fontSize: '1rem', // Adjust the font size as needed
+							fontSize: '1rem', 
+							whiteSpace: 'pre-line', 
 						},
 					},}}
 					>
@@ -70,9 +71,8 @@ function PlayfairPage() {
 			
 			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '2rem', marginBottom: '20px' }}>
 				<TextField
-					label="Enter Shuffled Alphabet"
+					label="Enter Key"
 					variant="filled"
-					value={alphabet}
 					onChange={handleAlphabetChange}
 					sx={{
 						backgroundColor: 'white',
@@ -145,6 +145,16 @@ function PlayfairPage() {
 					value={outputValue}
 				/>
 			</div> 
+			<div style={{ marginTop: '40px', color: 'white', width: '75%' }}>
+			<h2>History & Background Information</h2>
+			<p>The Playfair Cipher, invented by Charles Wheatstone in 1854 and popularized by Baron Playfair, is a digraph substitution cipher that enhances the security of traditional monoalphabetic ciphers by encrypting pairs of letters instead of single letters. 
+				The Playfair Cipher operates on a 5x5 grid constructed from a keyword or phrase, which is used to generate a substitution alphabet while omitting duplicate letters and typically combining I and J into a single cell to accommodate the 25-letter grid. 
+				This grid is central to the encryption process, as it dictates how pairs of letters in the plaintext are transformed into ciphertext. 
+				When encrypting a pair of letters, the cipher employs specific rules based on their positions in the grid: if both letters are in the same row, they are replaced by the letters immediately to their right; if they are in the same column, they are replaced by the letters directly below; and if they form a rectangle, they are replaced by the letters on the same row but at the opposite corners. 
+				The Playfair Cipher was widely used during the late 19th and early 20th centuries, particularly by the military, due to its improved resistance to frequency analysis compared to simpler ciphers. 
+				However, as cryptanalysis techniques advanced, the vulnerabilities of the Playfair Cipher were revealed, leading to its decline in favor of more secure systems. 
+				Despite this, the Playfair Cipher remains an important historical method of encryption and is often studied to illustrate the concepts of digraph substitution and the evolution of encryption techniques.</p>
+			</div>
 		</div>
 	);
 }

@@ -1,4 +1,3 @@
-// HillCipherPage.tsx
 import React, { useState, useEffect } from 'react';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import { Grid, TextField, Tooltip, Button } from '@mui/material';
@@ -68,9 +67,6 @@ const Matrix: React.FC<MatrixProps> = ({ size, onMatrixChange }) => {
     );
 };
 
-
-
-
 function HillCipherPage() {
 	const [matrixSize, setMatrixSize] = useState<number>(2);
 	const [textValue, setTextValue] = useState("");
@@ -118,7 +114,6 @@ function HillCipherPage() {
 		setMatrixSize((prevSize) => (prevSize === 2 ? 3 : 2));
 	};
 
-
 	return (
 		<div
 		style={{
@@ -132,11 +127,12 @@ function HillCipherPage() {
 		<div style={{ gap: '1rem', display: 'flex', alignItems: 'center' }}>
 			<h1>Hill Cipher</h1>
 			<Tooltip
-			title="Instructions: Enter the key matrix for the Hill Cipher. The matrix should be invertible and its size should match the block size of the plaintext."
+			title={'Instructions:\n 1. Enter the key matrix for the Hill Cipher, whether it is 2x2 or 3x3. Its inverse will be displayed in the right matrix.\n The matrix should be invertible and its size should match the block size of the plaintext. \n 2. Enter the text to be encrypted or decrypted.\n You can optionally define a new alphabet.'}
 			componentsProps={{
 				tooltip: {
 				sx: {
 					fontSize: '1rem',
+					whiteSpace: 'pre-line', 
 				},
 				},
 			}}
@@ -151,9 +147,7 @@ function HillCipherPage() {
 			variant="contained"
 			onClick={toggleMatrixSize}
 			style={{ 
-				marginRight: '5rem',
-				// justifyContent: 'left',
-				
+				marginRight: '5rem',				
 			}}
 			>
 			Switch to {matrixSize === 2 ? '3x3' : '2x2'}
@@ -162,10 +156,8 @@ function HillCipherPage() {
 			<div style={{ marginLeft: '4rem' }}>
 				<InverseMatrix values={inverseMatrix} />
 			</div>
-			
 		</div>
-		
-
+	
 		<div style={{ marginTop: '20px', fontSize: 26, width: '75%' }}>
 		<TextField 
                   id="outlined-basic-a" 
@@ -219,9 +211,16 @@ function HillCipherPage() {
 					value={outputValue}
 				/>
 			</div>  
-			<div>
-				<h3>backgroudn info</h3>
-				<p> Hill cipher is a polygraphic substitution cipher based on linear algebra. Each letter is represented by a number modulo 26. Often the simple scheme A=0, B=1, ..., Z=25 is used, but this is not an essential feature of the cipher. To encrypt a message, each block of n letters (considered as an n-component vector) is multiplied by an invertible n × n matrix, then reduced modulo 26. The matrix used for encryption is the cipher key, and it should be chosen randomly from the set of invertible n × n matrices (modulo 26).</p>
+			<div style={{ marginTop: '40px', color: 'white', width: '75%' }}>
+			<h2>History & Background Information</h2>
+			<p>The Hill Cipher, developed by the American mathematician Lester S. Hill in 1929, is a significant advancement in the field of cryptography, representing one of the first polygraphic substitution ciphers. 
+				Unlike traditional ciphers that encrypt one letter at a time, the Hill Cipher processes blocks of letters simultaneously, utilizing linear algebra concepts and matrix multiplication to encrypt plaintext. 
+				The encryption process involves converting the plaintext into numerical vectors, multiplying these vectors by a key matrix, and then performing modular arithmetic to produce ciphertext. 
+				This method increases the complexity of the cipher, making it more resistant to frequency analysis than earlier encryption techniques. 
+				The Hill Cipher was innovative not only for its mathematical foundation but also for its ability to encrypt longer messages more securely. 
+				Despite its strengths, the cipher is vulnerable to known-plaintext attacks if the key is not kept secret, as the linearity of the encryption process can be exploited. 
+				While the Hill Cipher fell out of favor with the advent of more sophisticated encryption methods, it remains an important example of how mathematics can be applied to cryptography. 
+				Today, the Hill Cipher is often studied in academic settings to illustrate the intersection of linear algebra and encryption, and it serves as a foundational concept for understanding more complex cryptographic systems.</p>
 			</div>
 		</div>
 	);

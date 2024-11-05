@@ -8,15 +8,18 @@ interface FuncProps {
     encryptionmethod: string;
     alphabet?: string;
 }
-
-const GetOutputVigenere = (inputText :string , keyString: string, alphabet: string) =>
-{
-    return `Encrypted the plaintext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
-};
-
-const GetOutputAffine = (inputText: string, keyString: string, alphabet: string) => {
-    const [aValue, bValue] = keyString.split(",");  
-    return `Encrypted the plaintext ${inputText} with A=${aValue}, B=${bValue}, alphabet=${alphabet}`;
+const GetOutputAffine = async (inputText: string, keyString: string, alphabet: string) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:5000/encrypt/affine', {
+            inputText,
+            keyString,
+            alphabet,
+            cipher: 'affine',
+        });
+        return response.data.encrypted_text;
+      } catch (err) {
+        return "ERROR";
+      }
 };
 
 const GetOutputMonoAlphabetic = async (inputText: string, keyString: string) => {
@@ -32,14 +35,47 @@ const GetOutputMonoAlphabetic = async (inputText: string, keyString: string) => 
       }
 };
 
-const GetOutputHill = (inputText: string, keyString: string, alphabet: string) => {
-    return `Encrypted the plaintext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
-}
+const GetOutputVigenere = async (inputText :string , keyString: string, alphabet: string) =>
+{
+    try {
+        const response = await axios.post('http://127.0.0.1:5000/encrypt/vigenere', {
+            inputText,
+            keyString,
+            alphabet,
+            cipher: 'vigenere',
+        });
+        return response.data.encrypted_text;
+      } catch (err) {
+        return "ERROR";
+      }
+};
 
-const GetOutputPlayfair = (inputText: string, keyString: string, alphabet: string) => {
-    return `Encrypted the plaintext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;    
-}
+const GetOutputHill = async (inputText: string, keyString: string, alphabet: string) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:5000/encrypt/hill', {
+            inputText,
+            keyString,
+            alphabet,
+            cipher: 'hill',
+        });
+        return response.data.encrypted_text;
+      } catch (err) {
+        return "ERROR";
+      }
+};
 
+const GetOutputPlayfair = async (inputText: string, keyString: string) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:5000/encrypt/playfair', {
+            inputText,
+            keyString,
+            cipher: 'playfair',
+        });
+        return response.data.encrypted_text;
+      } catch (err) {
+        return "ERROR";
+      }
+};
 
 const EncryptButton = ({ inputText, SetOutput, keyString, encryptionmethod, alphabet }: FuncProps) => {
     const handleClick = async () => {
@@ -48,23 +84,20 @@ const EncryptButton = ({ inputText, SetOutput, keyString, encryptionmethod, alph
             case "Affine":
                 output = await GetOutputAffine(inputText, keyString, alphabet || "");
                 break;
-                case "Mono-Alphabetic":
-                    output = await GetOutputMonoAlphabetic(inputText, keyString)                    
-                    break;
-                case "Vigenere":
-                    output = await GetOutputVigenere(inputText, keyString, alphabet || "")
-                    break;
-                case "Hill":
-                    output = await GetOutputHill(inputText, keyString, alphabet || "");
-                    break;
-                case "Playfair":
-                    output = await GetOutputPlayfair(inputText, keyString, alphabet || "");
-                    break;
-                case "Extended GCD":
-                    // Implement the decryption logic here
-                    break;
-                default:
-                    break;
+            case "Mono-Alphabetic":
+                output = await GetOutputMonoAlphabetic(inputText, keyString)                    
+                break;
+            case "Vigenere":
+                output = await GetOutputVigenere(inputText, keyString, alphabet || "")
+                break;
+            case "Hill":
+                output = await GetOutputHill(inputText, keyString, alphabet || "");
+                break;
+            case "Playfair":
+                output = await GetOutputPlayfair(inputText, keyString || "");
+                break;
+            default:
+                break;
         }
         SetOutput(output);
     };

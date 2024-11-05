@@ -9,14 +9,33 @@ interface FuncProps {
     alphabet?: string;
 }
 
-const GetOutputVigenere = (inputText :string , keyString: string, alphabet: string) =>
+const GetOutputVigenere = async (inputText :string , keyString: string, alphabet: string) =>
 {
-    return `Decrypted the plaintext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
+    try {
+        const response = await axios.post('http://127.0.0.1:5000/decrypt/vigenere', {
+            inputText,
+            keyString,
+            alphabet,
+            cipher: 'vigenere',
+        });
+        return response.data.decrypted_text;
+      } catch (err) {
+        return "ERROR";
+      }
 };
 
-const GetOutputAffine = (inputText: string, keyString: string, alphabet: string) => {
-    const [aValue, bValue] = keyString.split(",");  // Split to get aValue and bValue
-    return `Decrypted the ciphertext ${inputText} with A=${aValue}, B=${bValue}, alphabet=${alphabet}`;
+const GetOutputAffine = async (inputText: string, keyString: string, alphabet: string) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:5000/decrypt/affine', {
+            inputText,
+            keyString,
+            alphabet,
+            cipher: 'affine',
+        });
+        return response.data.decrypted_text;
+      } catch (err) {
+        return "ERROR";
+      }
 };
 
 const GetOutputMonoAlphabetic = async (inputText: string, keyString: string) => {
@@ -32,13 +51,32 @@ const GetOutputMonoAlphabetic = async (inputText: string, keyString: string) => 
       }
 };
 
-const GetOutputHill = (inputText: string, keyString: string, alphabet: string) => {
-    return `Decrypted the ciphertext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
-}
+const GetOutputHill = async (inputText: string, keyString: string, alphabet: string) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:5000/decrypt/hill', {
+            inputText,
+            keyString,
+            alphabet, 
+            cipher: 'hill',
+        });
+        return response.data.decrypted_text;
+      } catch (err) {
+        return "ERROR";
+      }
+};
 
-const GetOutputPlayfair = (inputText: string, keyString: string, alphabet: string) => {
-    return `Decrypted the ciphertext ${inputText} with keyString=${keyString}, alphabet=${alphabet}`;
-}
+const GetOutputPlayfair = async (inputText: string, keyString: string) => {
+    try {
+        const response = await axios.post('http://127.0.0.1:5000/decrypt/playfair', {
+            inputText,
+            keyString,
+            cipher: 'playfair',
+        });
+        return response.data.decrypted_text;
+      } catch (err) {
+        return "ERROR";
+      }
+};
 
 const DecryptButton =  ({ inputText, SetOutput, keyString, encryptionmethod, alphabet }: FuncProps) => {
     const handleClick = async () => {
@@ -57,7 +95,7 @@ const DecryptButton =  ({ inputText, SetOutput, keyString, encryptionmethod, alp
                 output = await GetOutputHill(inputText, keyString, alphabet || "");
                 break;
             case "Playfair":
-                output = await GetOutputPlayfair(inputText, keyString, alphabet || "");
+                output = await GetOutputPlayfair(inputText, keyString || "");
                 break;
             case "Extended GCD":
                 // Implement the decryption logic here

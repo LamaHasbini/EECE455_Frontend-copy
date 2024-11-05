@@ -49,22 +49,22 @@ function AffineCipherPage() {
           justifyContent: 'center',
           alignItems: 'center',
           flexDirection: 'column',
-        //   padding: '20px',
           boxSizing: 'border-box'
       }}>
         <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
           <h1>Affine Cipher</h1>
           <Tooltip 
-          title="Instructions: Enter positive integers for A and B. Ensure that A and the length of the alphabet are coprime. Enter a shuffled alphabet if desired. Enter the text to be encrypted or decrypted."
-          componentsProps={{
-            tooltip: {
-              sx: {
-                fontSize: '1rem', // Adjust the font size as needed
-              },
-            },
-          }}
-          >
-                <HelpOutlineOutlinedIcon fontSize='large'/>
+            title={`Instructions:\n 1. Enter A and B, the positive integer coefficients of the Affine Cipher, if you have them.\n 2. Enter a shuffled alphabet if desired. Otherwise, the default alphabet will be used.\n 3. Enter the text to be encrypted, decrypted, or cracked.`}
+            componentsProps={{
+                tooltip: {
+                sx: {
+                    fontSize: '1rem', 
+                    whiteSpace: 'pre-line', 
+                },
+                },
+            }}
+            >
+            <HelpOutlineOutlinedIcon fontSize='large'/>
             </Tooltip>
         </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '40px' }}>              
@@ -105,9 +105,7 @@ function AffineCipherPage() {
                       backgroundColor: 'white', 
                       borderRadius: '8px',
                       width: '20rem',
-                    //   height: '4rem'
                   }} 
-                  
               />
 
           <div style={{ marginTop: '20px', fontSize: 26, width: '75%' }}>
@@ -150,7 +148,19 @@ function AffineCipherPage() {
                   }}
                   value={outputValue}
               />
-          </div>  
+          </div> 
+          {/* History & Background Info Section */}
+          <div style={{ marginTop: '40px', color: 'white', width: '75%' }}>
+                <h2>History & Background Information</h2>
+                <p>The Affine Cipher is a classical encryption technique that dates back to the early days of cryptography. 
+                    It is a type of substitution cipher, which means each letter in the plaintext is mapped to a single corresponding letter in the ciphertext. 
+                    The most famous example of Affine Ciphers is the Caesar Cipher, named after Julius Caesar, who reportedly used it to protect military messages.
+                    Building on the principles of the Caesar Cipher, the Affine Cipher uses a more complex mathematical formula to provide additional security. 
+                    Specifically, it applies an encryption function of the form  C = (AP + B) mod M , where C represents the position of each ciphertext character in the alphabet, A  and  B  are key coefficients, P represents the position of each plaintext character, and  M  is the size of the alphabet (typically 26 in the English alphabet). 
+                    For the cipher to be invertible, A  must be chosen such that it is coprime to  M , ensuring that the decryption process can uniquely reverse the transformation. 
+                    Historically, the Affine Cipher offered increased protection against frequency analysis compared to simpler substitution ciphers, making it a favored choice before the development of more advanced ciphers. 
+                    Although it is not secure by modern standards, the Affine Cipher remains an interesting example of early cryptographic methods and is widely used as a teaching tool in cryptography and mathematics.</p>
+            </div>
       </div>
   );
 }
