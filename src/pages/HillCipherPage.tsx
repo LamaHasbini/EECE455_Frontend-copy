@@ -125,7 +125,7 @@ function HillCipherPage() {
 		}}
 		>
 		<div style={{ gap: '1rem', display: 'flex', alignItems: 'center' }}>
-			<h1>Hill Cipher</h1>
+			<h1 style={{ color: 'white' }}>Hill Cipher</h1>
 			<Tooltip
 			title={'Instructions:\n 1. Enter the key matrix for the Hill Cipher, whether it is 2x2 or 3x3. Its inverse will be displayed in the right matrix.\n The matrix should be invertible and its size should match the block size of the plaintext. \n 2. Enter the text to be encrypted or decrypted.\n You can optionally define a new alphabet.'}
 			componentsProps={{
@@ -137,7 +137,7 @@ function HillCipherPage() {
 				},
 			}}
 			>
-			<HelpOutlineOutlinedIcon fontSize="large" />
+			<HelpOutlineOutlinedIcon fontSize="large" style={{ color: 'white' }}/>
 			</Tooltip>
 		</div>
 

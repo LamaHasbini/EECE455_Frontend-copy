@@ -46,7 +46,7 @@ function MonoAlphabeticPage() {
         }}>
             {/* Title Section */}
             <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
-            <h1>Mono-Alphabetic Cipher</h1>
+            <h1 style={{ color: 'white' }}>Mono-Alphabetic Cipher</h1>
                 <Tooltip 
                 title="Instructions: Enter the alphabet mapping for the mono-alphabetic cipher. Each letter should be unique."
                 componentsProps={{
@@ -56,13 +56,13 @@ function MonoAlphabeticPage() {
                 },
                 },}}
                 >
-                    <HelpOutlineOutlinedIcon fontSize='large'/>
+                    <HelpOutlineOutlinedIcon fontSize='large' style={{ color: 'white' }}/>
                 </Tooltip>
             </div>
 
             {/* Plain Text Input */}
             <div style={{ width: '100%', marginBottom: '20px' }}>
-                <Typography variant="h6" style={{  marginBottom: '5px' }}>Input Text:</Typography>
+                <Typography variant="h6" style={{  marginBottom: '5px', color: 'white'}}>Input Text:</Typography>
                 <TextField  
                     variant="outlined"
                     multiline
@@ -80,7 +80,7 @@ function MonoAlphabeticPage() {
 
             {/* Key Display */}
             <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '20px' }}>
-                <Typography variant="body1" style={{ marginRight: '10px', fontWeight: 'bold' }}>Key:</Typography>
+                <Typography variant="body1" style={{ marginRight: '10px', fontWeight: 'bold', color: 'white' }}>Key:</Typography>
                 <TextField
                     variant="outlined"
                     value={alphabet}
@@ -148,7 +148,7 @@ function MonoAlphabeticPage() {
 
             {/* Cipher Text Output */}
             <div style={{ width: '100%', marginTop: '20px' }}>
-                <Typography variant="h6" style={{ marginBottom: '5px' }}>Output Text:</Typography>
+                <Typography variant="h6" style={{ marginBottom: '5px', color: 'white' }}>Output Text:</Typography>
                 <TextField
                     variant="outlined"
                     multiline

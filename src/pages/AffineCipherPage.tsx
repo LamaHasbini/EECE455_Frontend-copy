@@ -52,7 +52,7 @@ function AffineCipherPage() {
           boxSizing: 'border-box'
       }}>
         <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
-          <h1>Affine Cipher</h1>
+          <h1 style={{ color: 'white' }}>Affine Cipher</h1>
           <Tooltip 
             title={`Instructions:\n 1. Enter A and B, the positive integer coefficients of the Affine Cipher, if you have them.\n 2. Enter a shuffled alphabet if desired. Otherwise, the default alphabet will be used.\n 3. Enter the text to be encrypted, decrypted, or cracked.`}
             componentsProps={{
@@ -64,7 +64,7 @@ function AffineCipherPage() {
                 },
             }}
             >
-            <HelpOutlineOutlinedIcon fontSize='large'/>
+            <HelpOutlineOutlinedIcon fontSize='large' style={{ color: 'white' }}/>
             </Tooltip>
         </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '40px' }}>              

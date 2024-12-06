@@ -54,7 +54,7 @@ function PlayfairPage() {
 			boxSizing: 'border-box',
 		}}>
 			<div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
-				<h1>Playfair Cipher</h1>
+				<h1 style={{ color: 'white' }}>Playfair Cipher</h1>
 					<Tooltip 
 					title={'Instructions:\n 1. Enter the key to be used in the Playfair cipher. The coresponding 5x5 matrix will be displayed with each letter of the alphabet appearing exactly once (combining I and J into the same cell).\n 2. Enter the text which you wish to encrypt or decrypt.'}
 					componentsProps={{
@@ -65,7 +65,7 @@ function PlayfairPage() {
 						},
 					},}}
 					>
-							<HelpOutlineOutlinedIcon fontSize='large'/>
+							<HelpOutlineOutlinedIcon fontSize='large' style={{ color: 'white' }}/>
 					</Tooltip>
 			</div>
 			

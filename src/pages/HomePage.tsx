@@ -1,19 +1,22 @@
-import '../styles/HomePage.css'; 
+import Timeline from "./Timeline";
+import "../styles/HomePage.css";
 
-function HomePage() {
+const HomePage = () => {
+  const events = [
+    { date: "1900BCE", label: "Mono-Alphabetic", link: "/monoalphabetic" },
+    { date: "1553", label: "Vigenere Cipher", link: "/vigenere" },
+    { date: "1700s", label: "Affine Cipher", link: "/affine" },
+    { date: "1800s", label: "Extended GCD", link: "/extendedgcd" },
+    { date: "1854", label: "Playfair Cipher", link: "/playfair" },
+    { date: "1929", label: "Hill Cipher", link: "/hill" },
+  ];
+
   return (
-    <div className="home-container">
-      <h1> BitsOfCrypto </h1>
-      <div className="cipher-buttons">
-        <button onClick={() => window.location.href = "/affine"}>Affine Cipher</button>
-        <button onClick={() => window.location.href = "/monoalphabetic"}>Mono-Alphabetic Cipher</button>
-        <button onClick={() => window.location.href = "/vigenere"}>Vigenere Cipher</button>
-        <button onClick={() => window.location.href = "/hill"}>Hill Cipher</button>
-        <button onClick={() => window.location.href = "/playfair"}>Playfair Cipher</button>
-        <button onClick={() => window.location.href = "/extendedgcd"}>Extended GCD</button>
-      </div>
+    <div className="homepage-container">
+      <h1>BitsOfCrypto</h1>
+      <Timeline events={events} />
     </div>
   );
-}
+};
 
 export default HomePage;

@@ -136,7 +136,7 @@ function EuclidPage() { // inverse of b mod m
       boxSizing: 'border-box'
     }}>
       <div style={{ gap: '1rem', display: 'flex', alignItems: 'center' }}>
-        <h1>Extended GCD</h1>
+        <h1 style={{ color: 'white' }}>Extended GCD</h1>
         <Tooltip
           title={`Instructions:\n Enter two integers M and B to compute the inverse of B mod M.`}
           componentsProps={{
@@ -148,7 +148,7 @@ function EuclidPage() { // inverse of b mod m
             },
           }}
         >
-          <HelpOutlineOutlinedIcon fontSize='large' />
+          <HelpOutlineOutlinedIcon fontSize='large' style={{ color: 'white' }}/>
         </Tooltip>
       </div>
 

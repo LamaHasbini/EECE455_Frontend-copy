@@ -41,7 +41,7 @@ function VigenerePage() {
             boxSizing: 'border-box',
         }}>
             <div style={{gap: '1rem', display: 'flex', alignItems: 'center'}}>
-            <h1>Vigenere Cipher</h1>
+            <h1 style={{ color: 'white' }}>Vigenere Cipher</h1>
             <Tooltip 
                     title={'Instructions:\n 1. Enter the key word to be used for the Vigenere Cipher.\n 2. Enter the text that you wish to encrypt or decrypt.\n You can optionally define the alphabet to be used, otherwise the default will be applied.'}
                     componentsProps={{
@@ -53,13 +53,13 @@ function VigenerePage() {
                         },
                     }}
                 >
-                    <HelpOutlineOutlinedIcon fontSize='large'/>
+                    <HelpOutlineOutlinedIcon fontSize='large' style={{ color: 'white' }}/>
                 </Tooltip>
             </div>
 
             {/* Key Section */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '40px' }}>
-                <span style={{ fontSize: '1.25rem' }}>Key:</span> 
+                <span style={{ fontSize: '1.25rem', color: 'white' }}>Key:</span> 
                 <TextField 
                     id="outlined-basic-a" 
                     label="Enter Keyword" 
