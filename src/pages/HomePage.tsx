@@ -1,14 +1,9 @@
-import React from 'react';
-import './HomePage.css'; 
+import '../styles/HomePage.css'; 
 
 function HomePage() {
   return (
     <div className="home-container">
-      <h1>Welcome to Bits of Crypto</h1>
-      <p>
-        Explore a variety of classic ciphers and cryptographic algorithms! 
-        Learn, encrypt, and decrypt with ease.
-      </p>
+      <h1> BitsOfCrypto </h1>
       <div className="cipher-buttons">
         <button onClick={() => window.location.href = "/affine"}>Affine Cipher</button>
         <button onClick={() => window.location.href = "/monoalphabetic"}>Mono-Alphabetic Cipher</button>
