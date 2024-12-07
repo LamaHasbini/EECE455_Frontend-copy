@@ -14,7 +14,7 @@ const HomePage = () => {
   return (
     <div className="homepage-container">
       <img src="./src/assets/wheel.png" alt="Logo" style={{ width: '300px', height: 'auto' }}/>
-      <h1 style={{ fontSize: '56px' }}>BitsOfCrypto</h1>
+      <h1 style={{ fontSize: '56px', color: 'white' }}>BitsOfCrypto</h1>
       <Timeline events={events} />
     </div>
   );
